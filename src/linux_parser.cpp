@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 #include "linux_parser.h"
 
@@ -68,7 +69,25 @@ vector<int> LinuxParser::Pids() {
 }
 
 // TODO: Read and return the system memory utilization
-float LinuxParser::MemoryUtilization() { return 0.0; }
+float LinuxParser::MemoryUtilization() {
+  string line;
+  string key;
+  long value;
+  std::unordered_map<std::string, long> memValues;
+  long cached;
+  std::ifstream filestream(kProcDirectory + kMeminfoFilename);
+  if (!filestream.is_open()) {
+        throw std::runtime_error("Failed to open file: /proc/meminfo");
+  }
+  while (std::getline(filestream, line)) {
+    std::replace(line.begin(), line.end(), ':', ' ');
+    std::istringstream linestream(line);
+    linestream >> key >> value;
+    memValues[key] = value;
+  }
+  cached = memValues["Cached"] + memValues["SReclaimable"] - memValues["Shmem"];
+  return static_cast<float>(memValues["MemTotal"] - memValues["MemFree"] - memValues["Buffers"] - cached) / static_cast<float>(memValues["MemTotal"]);
+}
 
 // TODO: Read and return the system uptime
 long LinuxParser::UpTime() { return 0; }
