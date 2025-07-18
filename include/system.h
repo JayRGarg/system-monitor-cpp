@@ -23,6 +23,7 @@ class System {
  private:
   Processor cpu_ = {};
   std::vector<Process> processes_ = {};
+  std::string os_ = LinuxParser::OperatingSystem();
   std::string kernel_ = LinuxParser::Kernel();
 };
 
