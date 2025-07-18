@@ -25,7 +25,7 @@ vector<Process>& System::Processes() { return processes_; }
 
 // TODO: Return the system's kernel identifier (string)
 std::string System::Kernel() {
-  return LinuxParser::Kernel();
+  return kernel_;
 }
 
 // TODO: Return the system's memory utilization
