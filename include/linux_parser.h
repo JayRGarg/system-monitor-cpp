@@ -19,6 +19,7 @@ const std::string kOSPath{"/etc/os-release"};
 const std::string kPasswordPath{"/etc/passwd"};
 
 const std::string kStatusVmData{"VmData:"};
+const std::string kStatusUid{"Uid:"};
 
 // System
 float MemoryUtilization();

@@ -23,6 +23,8 @@ class Process {
   long ram_;
   float cpu_utilization_;
   long int up_time_;
+  std::string user_name_;
+  std::string command_;
 };
 
 #endif

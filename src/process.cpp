@@ -29,7 +29,7 @@ int Process::Pid() const { return pid_; }
 float Process::CpuUtilization() const { return cpu_utilization_; }
 
 // TODO: Return the command that generated this process
-string Process::Command() const { return command_; }
+string Process::Command() { return command_; }
 
 // TODO: Return this process's memory utilization
 string Process::Ram() { return std::to_string(ram_); }
